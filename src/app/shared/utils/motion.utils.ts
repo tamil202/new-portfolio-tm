@@ -26,3 +26,20 @@ export function prefersReducedMotion(): Signal<boolean> {
   }
   return _reducedMotionSignal;
 }
+
+export function isLowPerfDevice(): boolean {
+  const nav = navigator as Navigator & { deviceMemory?: number; hardwareConcurrency?: number };
+  const memory = nav.deviceMemory ?? 8;
+  const cores = nav.hardwareConcurrency ?? 4;
+  return memory <= 4 || cores <= 4;
+}
+
+export function motionScale(): number {
+  return isLowPerfDevice() ? 0.7 : 1;
+}
+
+export function applyMotionClass(): void {
+  if (isLowPerfDevice()) {
+    document.documentElement.classList.add('reduce-motion-lite');
+  }
+}

@@ -1,8 +1,9 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Project, SkillGroup, Experience, SocialLink } from '@shared/types/portfolio.types';
+import { Project, SkillGroup, Experience, SocialLink, Testimonial } from '@shared/types/portfolio.types';
 import { PROJECTS_DATA } from './projects.data';
 import { SKILLS_DATA } from './skills.data';
 import { EXPERIENCE_DATA, SOCIAL_LINKS } from './experience.data';
+import { TESTIMONIALS_DATA } from './testimonials.data';
 
 @Injectable({ providedIn: 'root' })
 export class PortfolioStore {
@@ -11,12 +12,14 @@ export class PortfolioStore {
   private readonly _skills = signal<SkillGroup[]>(SKILLS_DATA);
   private readonly _experience = signal<Experience[]>(EXPERIENCE_DATA);
   private readonly _socialLinks = signal<SocialLink[]>(SOCIAL_LINKS);
+  private readonly _testimonials = signal<Testimonial[]>(TESTIMONIALS_DATA);
 
   // Public readonly signals
   readonly projects = this._projects.asReadonly();
   readonly skills = this._skills.asReadonly();
   readonly experience = this._experience.asReadonly();
   readonly socialLinks = this._socialLinks.asReadonly();
+  readonly testimonials = this._testimonials.asReadonly();
 
   // Computed signals for derived data
   readonly featuredProjects = computed(() =>

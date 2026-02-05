@@ -55,7 +55,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     platform: 'Email',
-    url: 'mailto:tvanan834@gmail.com',
+    url: 'mailto:tdev@tamix.in',
     icon: 'email'
   }
 ];

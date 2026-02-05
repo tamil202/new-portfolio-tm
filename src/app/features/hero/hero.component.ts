@@ -65,6 +65,15 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
           <a href="#contact" class="btn btn-secondary cyber-btn" (click)="scrollTo($event, 'contact')">
             <span class="btn-glitch" data-text="Get in Touch">Get in Touch</span>
           </a>
+          <a href="/assets/Tamilvanan_Resume.pdf" class="btn btn-secondary cyber-btn" download>
+            <span class="btn-glitch" data-text="Download Resume">Download Resume</span>
+          </a>
+        </div>
+
+        <div class="hero-badges" #badges>
+          <span class="badge-pill">Open to Full-time</span>
+          <span class="badge-pill">Open to Contract</span>
+          <span class="badge-pill">Remote Friendly</span>
         </div>
 
         <!-- Stats HUD -->
@@ -312,6 +321,24 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
       opacity: 0;
     }
 
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 2rem;
+      opacity: 0;
+    }
+
+    .badge-pill {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #10b981;
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+    }
+
     /* Cyber Buttons */
     .btn {
       display: inline-flex;
@@ -480,6 +507,7 @@ export class HeroComponent {
   readonly roleText = viewChild.required<ElementRef>('roleText');
   readonly intro = viewChild.required<ElementRef>('intro');
   readonly cta = viewChild.required<ElementRef>('cta');
+  readonly badges = viewChild.required<ElementRef>('badges');
   readonly hud = viewChild.required<ElementRef>('hud');
   readonly ring1 = viewChild.required<ElementRef>('ring1');
   readonly ring2 = viewChild.required<ElementRef>('ring2');
@@ -567,6 +595,15 @@ export class HeroComponent {
     }, 1.4)
     .from(this.cta().nativeElement, { y: 20 }, '<');
 
+    // Availability badges
+    tl.to(this.badges().nativeElement, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 1.5)
+    .from(this.badges().nativeElement, { y: 20 }, '<');
+
     // HUD
     tl.to(this.hud().nativeElement, {
       opacity: 1,
@@ -588,6 +625,7 @@ export class HeroComponent {
       this.role().nativeElement,
       this.intro().nativeElement,
       this.cta().nativeElement,
+      this.badges().nativeElement,
       this.hud().nativeElement,
       this.ring1().nativeElement,
       this.ring2().nativeElement,

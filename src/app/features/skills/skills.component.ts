@@ -5,7 +5,9 @@ import {
   viewChild,
   viewChildren,
   inject,
-  DestroyRef
+  DestroyRef,
+  signal,
+  computed
 } from '@angular/core';
 import { PortfolioStore } from '@core/data/portfolio.store';
 import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
@@ -17,8 +19,22 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     <section class="skills section" id="skills">
       <div class="container">
         <h2 class="section-title">Skills & Technologies</h2>
+        <p class="section-subtitle">Core stack grouped by category with quick filters.</p>
+        <div class="skill-filters" role="tablist" aria-label="Skill categories">
+          @for (category of categoryOptions(); track category) {
+            <button
+              type="button"
+              class="filter-chip"
+              [class.active]="activeCategory() === category"
+              (click)="setCategory(category)"
+              role="tab"
+              [attr.aria-selected]="activeCategory() === category">
+              {{ category }}
+            </button>
+          }
+        </div>
         <div #skillsGrid class="skills-grid">
-          @for (group of skills(); track group.category) {
+          @for (group of filteredSkills(); track group.category) {
             <div class="skill-group">
               <h3 class="skill-category">{{ group.category }}</h3>
               <div class="skill-list">
@@ -37,6 +53,42 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: -1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-chip {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-alt);
+      color: var(--color-text);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--color-accent);
+    }
+
+    .filter-chip.active {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
     }
 
     .skill-group {
@@ -69,11 +121,13 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
       font-size: 0.9375rem;
       color: var(--color-text);
       transition: border-color 0.2s ease, background 0.2s ease;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     }
 
     .skill-badge:hover {
       border-color: var(--color-accent);
       background: rgba(59, 130, 246, 0.05);
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
     }
   `]
 })
@@ -85,11 +139,28 @@ export class SkillsComponent {
   readonly skillBadges = viewChildren<ElementRef>('skillBadge');
 
   readonly skills = this.store.skills;
+  readonly activeCategory = signal('All');
+  readonly categoryOptions = computed(() => [
+    'All',
+    ...this.skills().map(group => group.category)
+  ]);
+
+  readonly filteredSkills = computed(() => {
+    const active = this.activeCategory();
+    if (active === 'All') {
+      return this.skills();
+    }
+    return this.skills().filter(group => group.category === active);
+  });
 
   constructor() {
     afterNextRender(() => {
       this.initAnimation();
     });
+  }
+
+  setCategory(category: string): void {
+    this.activeCategory.set(category);
   }
 
   private initAnimation(): void {

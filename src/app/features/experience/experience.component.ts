@@ -16,6 +16,7 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     <section class="experience section" id="experience">
       <div class="container">
         <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">Roles and responsibilities across product cycles.</p>
         <div #timeline class="timeline">
           @for (exp of experience(); track exp.id) {
             <div class="timeline-item">
@@ -50,6 +51,14 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     .timeline {
       position: relative;
       padding-left: 2rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: -1.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
     }
 
     .timeline::before {
@@ -96,8 +105,9 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     .timeline-content {
       background: var(--color-bg-alt);
       border: 1px solid var(--color-border);
-      border-radius: 12px;
-      padding: 1.5rem;
+      border-radius: 10px;
+      padding: 1.1rem;
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.08);
     }
 
     .timeline-header {
@@ -110,7 +120,7 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     }
 
     .timeline-role {
-      font-size: 1.125rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--color-text);
       margin-bottom: 0.25rem;
@@ -122,7 +132,7 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
     }
 
     .timeline-period {
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       color: var(--color-text-muted);
       white-space: nowrap;
     }
@@ -140,7 +150,8 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
       position: relative;
       padding-left: 1.25rem;
       color: var(--color-text-muted);
-      line-height: 1.6;
+      line-height: 1.5;
+      font-size: 0.9rem;
     }
 
     .timeline-highlights li::before {

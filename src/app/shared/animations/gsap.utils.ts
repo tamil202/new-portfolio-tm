@@ -1,7 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { prefersReducedMotion } from '../utils/motion.utils';
+import { prefersReducedMotion, motionScale } from '../utils/motion.utils';
 
 export interface AnimationOptions {
   duration?: number;
@@ -41,12 +41,13 @@ export function fadeSlideIn(
 
   const opts = { ...DEFAULT_OPTIONS, ...options };
   const target = element instanceof ElementRef ? element.nativeElement : element;
+  const scale = motionScale();
 
   return gsap.from(target, {
     opacity: 0,
-    y: opts.y,
-    x: opts.x,
-    duration: opts.duration,
+    y: (opts.y ?? 0) * scale,
+    x: (opts.x ?? 0) * scale,
+    duration: (opts.duration ?? 0) * scale,
     delay: opts.delay,
     ease: opts.ease
   });
@@ -64,14 +65,15 @@ export function staggerReveal(
   }
 
   const opts = { ...DEFAULT_OPTIONS, ...options };
+  const scale = motionScale();
 
   return gsap.from(elements, {
     opacity: 0,
-    y: opts.y,
-    duration: opts.duration,
+    y: (opts.y ?? 0) * scale,
+    duration: (opts.duration ?? 0) * scale,
     delay: opts.delay,
     ease: opts.ease,
-    stagger: opts.stagger
+    stagger: (opts.stagger ?? 0) * scale
   });
 }
 
@@ -119,13 +121,14 @@ export function scrollStaggerReveal(
   const target = container instanceof ElementRef ? container.nativeElement : container;
   const children = target.querySelectorAll(childSelector);
   const opts = { ...DEFAULT_OPTIONS, ...options };
+  const scale = motionScale();
 
   const tween = gsap.from(children, {
     opacity: 0,
-    y: opts.y,
-    duration: opts.duration,
+    y: (opts.y ?? 0) * scale,
+    duration: (opts.duration ?? 0) * scale,
     ease: opts.ease,
-    stagger: opts.stagger,
+    stagger: (opts.stagger ?? 0) * scale,
     paused: true
   });
 

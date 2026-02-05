@@ -19,12 +19,27 @@ import { gsap } from 'gsap';
     <section class="contact section" id="contact">
       <div class="container">
         <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Let’s build something fast, reliable, and user-friendly.</p>
         <div #contactContent class="contact-content">
           <div class="contact-info">
             <p class="contact-intro">
               Have a project in mind or want to discuss an opportunity?
               I'd love to hear from you.
             </p>
+            <div class="contact-meta">
+              <div class="meta-row">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">Bangalore, Karnataka</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Timezone</span>
+                <span class="meta-value">IST (UTC+05:30)</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Availability</span>
+                <span class="meta-value">Open to full-time and contract roles</span>
+              </div>
+            </div>
             <div class="contact-links">
               @for (link of socialLinks(); track link.platform) {
                 <a
@@ -33,6 +48,15 @@ import { gsap } from 'gsap';
                   rel="noopener"
                   class="social-link">
                   {{ link.platform }}
+                </a>
+              }
+              @for (link of quickLinks; track link.label) {
+                <a
+                  [href]="link.url"
+                  target="_blank"
+                  rel="noopener"
+                  class="social-link">
+                  {{ link.label }}
                 </a>
               }
             </div>
@@ -117,6 +141,13 @@ import { gsap } from 'gsap';
       background: var(--color-bg-alt);
     }
 
+    .section-subtitle {
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: -1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
     .contact-content {
       display: grid;
       grid-template-columns: 1fr;
@@ -134,6 +165,36 @@ import { gsap } from 'gsap';
       color: var(--color-text-muted);
       line-height: 1.8;
       margin-bottom: 1.5rem;
+    }
+
+    .contact-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: rgba(59, 130, 246, 0.03);
+      font-size: 0.85rem;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .meta-label {
+      color: var(--color-text-muted);
+    }
+
+    .meta-value {
+      color: var(--color-text);
+      font-weight: 500;
+      text-align: right;
+      max-width: 60%;
     }
 
     .contact-links {
@@ -228,6 +289,7 @@ import { gsap } from 'gsap';
     .btn-primary {
       background: var(--color-accent);
       color: white;
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
     }
 
     .btn-primary:hover:not(:disabled) {
@@ -247,6 +309,10 @@ export class ContactComponent {
 
   readonly contactContent = viewChild.required<ElementRef>('contactContent');
   readonly socialLinks = this.store.socialLinks;
+  readonly quickLinks = [
+    { label: 'Resume (PDF)', url: '/assets/Tamilvanan_Resume.pdf' },
+    { label: 'Open VSX', url: 'https://open-vsx.org/' }
+  ];
 
   // Form data as signals for reactivity
   readonly name = signal('');
@@ -307,7 +373,7 @@ export class ContactComponent {
     this.isSubmitting.set(true);
 
     // Build mailto URL with form data
-    const toEmail = 'tvanan834@gmail.com';
+    const toEmail = 'tdev@tamix.in';
     const userName = this.name();
     const userEmail = this.email();
     const userMessage = this.message();
