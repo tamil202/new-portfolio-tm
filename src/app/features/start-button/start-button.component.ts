@@ -447,6 +447,7 @@ import { gsap } from 'gsap';
       will-change: transform;
       position: relative;
       overflow: hidden;
+      transform-origin: center;
     }
 
     .door-lines {
@@ -464,10 +465,12 @@ import { gsap } from 'gsap';
 
     .door-left {
       border-right: 2px solid rgba(59, 130, 246, 0.3);
+      transform-origin: 0 0;
     }
 
     .door-right {
       border-left: 2px solid rgba(59, 130, 246, 0.3);
+      transform-origin: 100% 100%;
     }
 
     .door-light {
@@ -758,16 +761,18 @@ export class StartButtonComponent {
 
     // Step 4: Door opening with light
     masterTimeline
-      .to(doorLeft, {
-        x: '-100%',
-        duration: 1.2,
-        ease: 'power3.inOut'
-      }, 0.7)
-      .to(doorRight, {
-        x: '100%',
-        duration: 1.2,
-        ease: 'power3.inOut'
-      }, 0.75)
+    .to(doorLeft, {
+      x: '-120%',
+      y: '-120%',
+      duration: 1.2,
+      ease: 'power3.inOut'
+    }, 0.7)
+    .to(doorRight, {
+      x: '120%',
+      y: '120%',
+      duration: 1.2,
+      ease: 'power3.inOut'
+    }, 0.75)
       .to(doorLight, {
         opacity: 0,
         width: '100vw',

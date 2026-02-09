@@ -43,10 +43,12 @@ gsap.registerPlugin(ScrollToPlugin);
 
     <!-- Main Content (always rendered, animated by GSAP) -->
     <header class="header" [class.visible]="hasStarted()">
-      <!-- Snake Game Background -->
-      <canvas #snakeCanvas class="snake-canvas"></canvas>
+      <!-- Architecture Grid Background -->
+      <canvas #architectureCanvas class="architect-canvas"></canvas>
       <nav class="nav container" aria-label="Primary">
-        <a href="#home" class="nav-logo" (click)="scrollTo($event, 'home')">Tamilvanan</a>
+        <a href="#home" class="nav-logo" (click)="scrollTo($event, 'home')">
+          <span>Thirumurugan Gnanam <sup class="nav-logo-tm" aria-hidden="true">TM</sup></span>
+        </a>
         <button
           type="button"
           class="nav-toggle"
@@ -66,8 +68,7 @@ gsap.registerPlugin(ScrollToPlugin);
           <li><a href="#contact" [class.active]="activeSection() === 'contact'" (click)="scrollTo($event, 'contact'); closeMobileNav()">Contact</a></li>
         </ul>
         <div class="nav-actions">
-          <a class="nav-link" href="/assets/Tamilvanan_Resume.pdf" download>Resume</a>
-          <a class="nav-cta" href="#contact" (click)="scrollTo($event, 'contact')">Hire Me</a>
+          <a class="nav-link" href="/assets/Thiru_New.docx" download>Resume</a>
         </div>
       </nav>
     </header>
@@ -82,7 +83,6 @@ gsap.registerPlugin(ScrollToPlugin);
       <app-contact />
     </main>
 
-    <a class="sticky-cta" href="#contact" (click)="scrollTo($event, 'contact')">Hire Me</a>
     @if (showBackToTop()) {
       <button class="back-to-top" type="button" (click)="scrollToTop()" aria-label="Back to top">
         ↑
@@ -91,7 +91,7 @@ gsap.registerPlugin(ScrollToPlugin);
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; {{ currentYear }} Tamilvanan. Built with Angular.</p>
+        <p>&copy; {{ currentYear }} Thirumurugan Gnanam.</p>
       </div>
     </footer>
   `,
@@ -214,14 +214,16 @@ gsap.registerPlugin(ScrollToPlugin);
       transform: translateY(0);
     }
 
-    .snake-canvas {
+    .architect-canvas {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.4;
+      opacity: 0.5;
+      mix-blend-mode: screen;
       z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
     }
 
     .nav {
@@ -239,6 +241,17 @@ gsap.registerPlugin(ScrollToPlugin);
       color: var(--color-text);
       text-decoration: none;
       cursor: pointer;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.15rem;
+    }
+
+    .nav-logo-tm {
+      font-size: 0.6rem;
+      vertical-align: top;
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+      text-transform: uppercase;
     }
 
     .nav-links {
@@ -388,7 +401,7 @@ gsap.registerPlugin(ScrollToPlugin);
 export class AppComponent {
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly snakeCanvas = viewChild<ElementRef>('snakeCanvas');
+  readonly architectureCanvas = viewChild<ElementRef>('architectureCanvas');
   readonly currentYear = new Date().getFullYear();
   readonly hasStarted = signal(false);
   readonly activeSection = signal('home');
@@ -399,15 +412,12 @@ export class AppComponent {
   private sectionObserver: IntersectionObserver | null = null;
   private readonly sectionIds = ['home', 'about', 'skills', 'projects', 'testimonials', 'experience', 'contact'];
 
-  // Snake game properties
-  private snakeGameInterval: any = null;
-  private snakeCtx: CanvasRenderingContext2D | null = null;
+  // Architecture canvas animation properties
+  private architectureCtx: CanvasRenderingContext2D | null = null;
+  private architectureAnimationFrame: number | null = null;
+  private architectureCanvasMetrics = { width: 0, height: 0, dpr: 1 };
   private resizeObserver: ResizeObserver | null = null;
-  private canvasMetrics = { width: 0, height: 0, dpr: 1 };
-  private snake: { x: number; y: number }[] = [];
-  private food: { x: number; y: number } = { x: 0, y: 0 };
-  private direction: { x: number; y: number } = { x: 1, y: 0 };
-  private readonly gridSize = 8;
+  private blueprintLines: { x: number; offset: number; length: number; speed: number; thickness: number }[] = [];
 
   constructor() {
     afterNextRender(() => {
@@ -421,8 +431,8 @@ export class AppComponent {
 
   onStarted(): void {
     this.hasStarted.set(true);
-    // Start snake game after a short delay
-    setTimeout(() => this.startSnakeGame(), 500);
+    // Kick off the architecture animation once the portal opens
+    setTimeout(() => this.startArchitectureAnimation(), 500);
   }
 
   toggleMobileNav(): void {
@@ -520,153 +530,134 @@ export class AppComponent {
     });
   }
 
-  private startSnakeGame(): void {
-    const canvas = this.snakeCanvas()?.nativeElement as HTMLCanvasElement;
+  private resetArchitectureAnimation(): void {
+    if (this.architectureAnimationFrame !== null) {
+      cancelAnimationFrame(this.architectureAnimationFrame);
+      this.architectureAnimationFrame = null;
+    }
+  }
+
+  private startArchitectureAnimation(): void {
+    const canvas = this.architectureCanvas()?.nativeElement as HTMLCanvasElement;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    this.snakeCtx = ctx;
 
-    // Set canvas size to match header (respect device pixel ratio)
-    this.setupSnakeCanvas(canvas);
+    this.architectureCtx = ctx;
+    this.resetArchitectureAnimation();
 
-    // Initialize snake in the middle
-    const startY = Math.floor(this.canvasMetrics.height / this.gridSize / 2);
-    this.snake = [
-      { x: 10, y: startY },
-      { x: 9, y: startY },
-      { x: 8, y: startY },
-      { x: 7, y: startY },
-      { x: 6, y: startY }
-    ];
-    this.direction = { x: 1, y: 0 };
-    this.spawnFood(canvas);
+    this.setupArchitectureCanvas(canvas);
+    this.spawnBlueprintLines();
+    this.animateArchitecture();
 
-    // Start game loop
-    this.snakeGameInterval = setInterval(() => this.updateSnakeGame(), 80);
-
-    // Handle resize with ResizeObserver for accurate canvas sizing
-    this.resizeObserver = new ResizeObserver(() => {
-      this.setupSnakeCanvas(canvas);
-    });
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = new ResizeObserver(() => this.setupArchitectureCanvas(canvas));
     this.resizeObserver.observe(canvas);
 
     this.destroyRef.onDestroy(() => {
-      if (this.snakeGameInterval) {
-        clearInterval(this.snakeGameInterval);
-      }
+      this.resetArchitectureAnimation();
       this.resizeObserver?.disconnect();
       this.resizeObserver = null;
     });
   }
 
-  private setupSnakeCanvas(canvas: HTMLCanvasElement): void {
+  private setupArchitectureCanvas(canvas: HTMLCanvasElement): void {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
     const width = Math.max(1, Math.floor(rect.width));
     const height = Math.max(1, Math.floor(rect.height));
 
-    this.canvasMetrics = { width, height, dpr };
+    this.architectureCanvasMetrics = { width, height, dpr };
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
-    if (this.snakeCtx) {
-      this.snakeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (this.architectureCtx) {
+      this.architectureCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+
+    this.spawnBlueprintLines();
   }
 
-  private spawnFood(canvas: HTMLCanvasElement): void {
-    const maxX = Math.floor(this.canvasMetrics.width / this.gridSize);
-    const maxY = Math.floor(this.canvasMetrics.height / this.gridSize);
-    this.food = {
-      x: Math.floor(Math.random() * maxX),
-      y: Math.floor(Math.random() * maxY)
-    };
-  }
-
-  private updateSnakeGame(): void {
-    const canvas = this.snakeCanvas()?.nativeElement as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = this.snakeCtx;
-    if (!ctx) return;
-
-    if (this.canvasMetrics.width === 0 || this.canvasMetrics.height === 0) {
+  private spawnBlueprintLines(): void {
+    const { width, height } = this.architectureCanvasMetrics;
+    if (width === 0 || height === 0) {
+      this.blueprintLines = [];
       return;
     }
 
-    const maxX = Math.floor(this.canvasMetrics.width / this.gridSize);
-    const maxY = Math.floor(this.canvasMetrics.height / this.gridSize);
+    const count = Math.max(8, Math.floor(width / 100));
+    this.blueprintLines = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      offset: Math.random() * height,
+      length: height * (0.3 + Math.random() * 0.4),
+      speed: 0.2 + Math.random() * 0.5,
+      thickness: 1 + Math.random() * 1.5
+    }));
+  }
 
-    // Move snake
-    const head = {
-      x: this.snake[0].x + this.direction.x,
-      y: this.snake[0].y + this.direction.y
-    };
-
-    // Wrap around edges
-    if (head.x >= maxX) head.x = 0;
-    if (head.x < 0) head.x = maxX - 1;
-    if (head.y >= maxY) head.y = 0;
-    if (head.y < 0) head.y = maxY - 1;
-
-    this.snake.unshift(head);
-
-    // Check food collision
-    if (head.x === this.food.x && head.y === this.food.y) {
-      this.spawnFood(canvas);
-      // Random direction change
-      if (Math.random() > 0.5) {
-        const dirs = [
-          { x: 1, y: 0 }, { x: -1, y: 0 },
-          { x: 0, y: 1 }, { x: 0, y: -1 }
-        ].filter(d => !(d.x === -this.direction.x && d.y === -this.direction.y));
-        this.direction = dirs[Math.floor(Math.random() * dirs.length)];
-      }
-    } else {
-      this.snake.pop();
+  private drawArchitectureGrid(ctx: CanvasRenderingContext2D): void {
+    const { width, height } = this.architectureCanvasMetrics;
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.22)';
+    ctx.beginPath();
+    for (let x = 0; x <= width; x += 48) {
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
     }
-
-    // Keep snake length reasonable
-    if (this.snake.length > 20) {
-      this.snake.pop();
+    for (let y = 0; y <= height; y += 48) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
     }
+    ctx.stroke();
 
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.12)';
+    ctx.beginPath();
+    for (let x = 0; x <= width; x += 96) {
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+    }
+    for (let y = 0; y <= height; y += 96) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
 
-    // Draw snake with glow
-    this.snake.forEach((segment, i) => {
-      const alpha = 0.8 - (i / this.snake.length) * 0.5;
-      ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
-      ctx.shadowColor = 'rgba(59, 130, 246, 0.6)';
-      ctx.shadowBlur = i === 0 ? 8 : 4;
-      ctx.fillRect(
-        segment.x * this.gridSize + 1,
-        segment.y * this.gridSize + 1,
-        this.gridSize - 2,
-        this.gridSize - 2
-      );
+  private animateArchitecture(): void {
+    const ctx = this.architectureCtx;
+    if (!ctx) return;
+
+    const { width, height } = this.architectureCanvasMetrics;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = 'rgba(4, 8, 18, 0.9)';
+    ctx.fillRect(0, 0, width, height);
+
+    this.drawArchitectureGrid(ctx);
+
+    const time = performance.now();
+    this.blueprintLines.forEach(line => {
+      const progress = ((line.offset + (time * line.speed) / 600) % (height + line.length)) - line.length;
+      const startY = progress;
+      const endY = startY + line.length;
+      const alpha = 0.35 + Math.abs(Math.sin((time + line.x * 10) / 1200)) * 0.5;
+      ctx.strokeStyle = `rgba(59, 130, 246, ${alpha.toFixed(3)})`;
+      ctx.lineWidth = line.thickness;
+      ctx.beginPath();
+      ctx.moveTo(line.x, startY);
+      ctx.lineTo(line.x + line.length * 0.25, endY);
+      ctx.stroke();
+      ctx.fillStyle = `rgba(14, 165, 233, ${alpha.toFixed(3)})`;
+      ctx.fillRect(line.x - 2, startY - 2, 4, 4);
     });
 
-    // Draw food
-    ctx.shadowColor = 'rgba(16, 185, 129, 0.8)';
-    ctx.shadowBlur = 8;
-    ctx.fillStyle = '#10b981';
-    ctx.beginPath();
-    ctx.arc(
-      this.food.x * this.gridSize + this.gridSize / 2,
-      this.food.y * this.gridSize + this.gridSize / 2,
-      this.gridSize / 2 - 1,
-      0,
-      Math.PI * 2
-    );
-    ctx.fill();
-    ctx.shadowBlur = 0;
+    this.architectureAnimationFrame = requestAnimationFrame(() => this.animateArchitecture());
   }
 
   scrollTo(event: Event, sectionId: string): void {

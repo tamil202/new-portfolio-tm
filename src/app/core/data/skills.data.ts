@@ -2,45 +2,67 @@ import { SkillGroup } from '@shared/types/portfolio.types';
 
 export const SKILLS_DATA: SkillGroup[] = [
   {
-    category: 'Frontend',
+    category: 'Architecture & Governance',
     skills: [
-      { name: 'HTML/CSS/JavaScript' },
-      { name: 'Angular' },
-      { name: 'TypeScript' },
-      { name: 'RxJS' },
-      { name: 'NgRx' },
-      { name: 'Angular Signals' },
-      { name: 'Signal Forms' },
-      { name: 'Angular CDK' },
-      { name: 'Tailwind CSS' },
-      { name: 'Component Design' }
+      { name: 'Enterprise Architecture' },
+      { name: 'Solution Architecture' },
+      { name: 'Architecture Review Boards' },
+      { name: 'Stakeholder Management' },
+      { name: 'Change Control' },
+      { name: 'Risk & Compliance' },
+      { name: 'TOGAF principles' },
+      { name: 'Audit & SOC guidance' }
     ]
   },
   {
-    category: 'Backend',
+    category: 'Data Architecture',
     skills: [
-      { name: 'Node.js' },
-      { name: 'Express' },
-      { name: 'NestJS' },
-      { name: 'REST APIs' },
+      { name: 'MSSQL Server' },
+      { name: 'PostgreSQL' },
       { name: 'MySQL' },
-      { name: 'SQLite' },
-      { name: 'Prisma' },
-      { name: 'Sequelize' },
-      { name: 'Docker' },
-      { name: 'Redis' },
-      { name: 'System Design' }
+      { name: 'Data Modeling' },
+      { name: 'Indexing Strategy' },
+      { name: 'Performance Tuning' },
+      { name: 'Backup & Recovery' },
+      { name: 'Replication' }
     ]
   },
   {
-    category: 'Tools & Systems',
+    category: 'Cloud Architecture',
     skills: [
-      { name: 'VS Code' },
-      { name: 'Git/GitLab' },
-      { name: 'Linux' },
-      { name: 'Raspberry Pi' },
-      { name: 'Gemini API' },
-      { name: 'Claude CLI' }
+      { name: 'AWS' },
+      { name: 'Azure' },
+      { name: 'GCP' },
+      { name: 'OCI' },
+      { name: 'Control Tower' },
+      { name: 'Security Hub' },
+      { name: 'Hybrid VPC/VNet' },
+      { name: 'Cloud Reference Architectures' },
+      { name: 'FinOps' }
+    ]
+  },
+  {
+    category: 'Security & Observability',
+    skills: [
+      { name: 'Snyk' },
+      { name: 'Cortex' },
+      { name: 'Wazuh' },
+      { name: 'Nessus' },
+      { name: 'Zabbix' },
+      { name: 'Vulnerability Management' }
+    ]
+  },
+  {
+    category: 'Automation & Tooling',
+    skills: [
+      { name: 'SSIS' },
+      { name: 'Power BI' },
+      { name: 'Amazon Glue' },
+      { name: 'Jenkins' },
+      { name: 'GitHub/GitLab' },
+      { name: 'Windows Server' },
+      { name: 'Ubuntu' },
+      { name: 'Kali Linux' }
     ]
   }
 ];

@@ -20,8 +20,8 @@ import { scrollStaggerReveal, refreshScrollTriggers } from '@shared/animations/g
     <section class="projects section" id="projects">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Projects</h2>
-          <p class="section-subtitle">Selected work with outcomes and impact.</p>
+          <h2 class="section-title">Architecture Programs</h2>
+          <p class="section-subtitle">Blueprints, governance, and automation streams that shaped enterprise systems.</p>
         </div>
         <div class="project-controls">
           <div class="filter-group" role="tablist" aria-label="Project type">
@@ -41,16 +41,7 @@ import { scrollStaggerReveal, refreshScrollTriggers } from '@shared/animations/g
               (click)="setType('company')"
               role="tab"
               [attr.aria-selected]="activeType() === 'company'">
-              Company
-            </button>
-            <button
-              type="button"
-              class="filter-chip"
-              [class.active]="activeType() === 'personal'"
-              (click)="setType('personal')"
-              role="tab"
-              [attr.aria-selected]="activeType() === 'personal'">
-              Personal
+              Architecture
             </button>
           </div>
           <label class="featured-toggle">

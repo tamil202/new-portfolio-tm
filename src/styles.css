@@ -47,9 +47,9 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background:
-    radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.15), transparent 40%),
-    radial-gradient(circle at 85% 10%, rgba(0, 240, 255, 0.12), transparent 35%),
-    linear-gradient(180deg, #06070d 0%, #0b1020 60%, #07080f 100%);
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.12), transparent 50%),
+    radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.08), transparent 45%),
+    linear-gradient(180deg, #02040a 0%, #050713 55%, #040712 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -200,10 +200,11 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.4;
+    linear-gradient(rgba(3, 7, 20, 0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3, 7, 20, 0.8) 1px, transparent 1px),
+    linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 20px 20px;
+  opacity: 0.35;
   pointer-events: none;
   z-index: -1;
 }
@@ -220,8 +221,8 @@ body::after {
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.12) 2px,
-      rgba(0, 0, 0, 0.12) 4px
+      rgba(14, 165, 233, 0.16) 2px,
+      rgba(14, 165, 233, 0.16) 4px
     );
   opacity: 0.3;
 }

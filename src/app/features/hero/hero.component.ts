@@ -36,12 +36,12 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
       <div class="hero-content">
         <div class="hero-badge" #badge>
           <span class="badge-dot"></span>
-          <span class="badge-text">SYSTEM ONLINE</span>
+          <span class="badge-text">ARCHITECT ONLINE</span>
         </div>
 
         <!-- Glitch Name -->
-        <h1 #name class="hero-name glitch" data-text="Tamilvanan">
-          <span class="glitch-text">Tamilvanan</span>
+        <h1 #name class="hero-name glitch" data-text="Thirumurugan Gnanam">
+          <span class="glitch-text">Thirumurugan Gnanam</span>
         </h1>
 
         <!-- Typing Role -->
@@ -52,28 +52,28 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
         </h2>
 
         <p #intro class="hero-intro">
-          Building scalable applications with Angular, NestJS, and Node.js. Clean code, high-performance UI, and practical solutions.
+          Architecting resilient cloud systems, compliance-first programs, and high-availability data platforms across AWS, Azure, and GCP.
         </p>
 
         <div #cta class="hero-cta">
           <a href="#projects" class="btn btn-primary cyber-btn" (click)="scrollTo($event, 'projects')">
-            <span class="btn-glitch" data-text="View Projects">View Projects</span>
+            <span class="btn-glitch" data-text="View Architecture Work">View Architecture Work</span>
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M7 17L17 7M17 7H7M17 7V17"/>
             </svg>
           </a>
           <a href="#contact" class="btn btn-secondary cyber-btn" (click)="scrollTo($event, 'contact')">
-            <span class="btn-glitch" data-text="Get in Touch">Get in Touch</span>
+            <span class="btn-glitch" data-text="Connect on Architecture">Connect on Architecture</span>
           </a>
-          <a href="/assets/Tamilvanan_Resume.pdf" class="btn btn-secondary cyber-btn" download>
-            <span class="btn-glitch" data-text="Download Resume">Download Resume</span>
+          <a href="/assets/Thiru_New.docx" class="btn btn-secondary cyber-btn" download>
+            <span class="btn-glitch" data-text="Download Architecture CV">Download Architecture CV</span>
           </a>
         </div>
 
         <div class="hero-badges" #badges>
-          <span class="badge-pill">Open to Full-time</span>
-          <span class="badge-pill">Open to Contract</span>
-          <span class="badge-pill">Remote Friendly</span>
+          <span class="badge-pill">Enterprise Architecture</span>
+          <span class="badge-pill">Cloud Systems Design</span>
+          <span class="badge-pill">Security-by-Design</span>
         </div>
 
         <!-- Stats HUD -->
@@ -572,7 +572,7 @@ export class HeroComponent {
       duration: 0.3
     }, 0.8)
     .to(this.roleText().nativeElement, {
-      text: { value: 'Software Engineer', delimiter: '' },
+      text: { value: 'Senior Technical Architect', delimiter: '' },
       duration: 1.5,
       ease: 'none'
     }, 0.9);
@@ -636,7 +636,7 @@ export class HeroComponent {
       el.style.opacity = '1';
     });
 
-    this.roleText().nativeElement.textContent = 'Software Engineer';
+    this.roleText().nativeElement.textContent = 'Senior Technical Architect';
   }
 
   scrollTo(event: Event, sectionId: string): void {

@@ -36,17 +36,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
         <div #content class="about-content">
           <div class="about-text">
             <p class="text-reveal">
-              Software Engineer based in Tamil Nadu, India with hands-on experience
-              across frontend and backend development using Angular, NestJS, Node.js, and MySQL.
+              Senior Technical Architect and MySQL Database Administrator with 18+ years of experience
+              shaping resilient cloud and data platforms.
             </p>
             <p class="text-reveal">
-              I focus on building reusable components, high-performance UI libraries,
-              and scalable backend services. Experienced in maintaining Linux-based personal
-              servers, developing automation tools, and integrating AI-assisted workflows.
+              Focused on enterprise architecture, FinOps governance, and secure multi-region systems
+              that stay compliant and performant under heavy load.
             </p>
             <p class="text-reveal">
-              Comfortable working across full product lifecycles including feature development,
-              bug fixing, testing, and internal tooling.
+              Certified across cloud, security, and architecture disciplines, guiding teams through
+              high-impact program delivery and system modernization.
             </p>
           </div>
           <div class="about-stats">
@@ -64,16 +63,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
               <span class="stat-number" #statNum>{{ displayProjects() }}+</span>
               <span class="stat-label">
                 <span class="label-bracket">[</span>
-                Projects Completed
+                Systems Architected
                 <span class="label-bracket">]</span>
               </span>
             </div>
             <div #statEl class="stat cyber-stat">
               <div class="stat-bar"></div>
-              <span class="stat-number" #statNum>{{ displayTech() }}+</span>
+              <span class="stat-number" #statNum>{{ displayTech() }}%</span>
               <span class="stat-label">
                 <span class="label-bracket">[</span>
-                Technologies
+                Cost Reduction
                 <span class="label-bracket">]</span>
               </span>
             </div>
@@ -348,7 +347,7 @@ export class AboutComponent {
 
   readonly yearsExperience = this.store.totalYearsExperience;
   readonly projectCount = this.store.projectCount;
-  readonly techCount = () => 22; // 22+ technologies
+  readonly techCount = () => 40; // 40% cost reduction
 
   // Animated display values
   readonly displayYears = signal(0);

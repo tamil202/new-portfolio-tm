@@ -1,145 +1,106 @@
 import { Project } from '@shared/types/portfolio.types';
 
 export const PROJECTS_DATA: Project[] = [
-  // Company Projects
   {
-    id: 'exmine',
-    title: 'EXMINE Application',
-    summary: 'Workflow-driven product app within the ULRS ecosystem.',
-    description: 'Product application within the ULRS ecosystem for business workflow and data-driven operations. Built with modern Angular using Signals for state management and signal-based forms. Worked on both frontend and backend modules, implementing features and fixing bugs.',
-    role: 'Full-stack engineer',
-    timeline: '2026',
-    impact: 'Stabilized critical workflows and improved admin efficiency.',
+    id: 'finops',
+    title: 'AWS FinOps Architecture',
+    summary: 'Architected a multi-account cost governance blueprint that cut spend from $100k to $60k/mo.',
+    description: 'Designed the AWS Control Tower and Security Hub architecture, introduced FinOps guardrails, and aligned cost ownership with compliance and monitoring practices.',
+    role: 'Senior Technical Project Manager',
+    timeline: '2025 - Present',
+    impact: 'Delivered 40% monthly cost reduction while strengthening governance, visibility, and architecture controls.',
     metrics: [
-      { label: 'Focus', value: 'Workflow automation' },
-      { label: 'Scope', value: 'Enterprise product' },
-      { label: 'Stack', value: 'Angular + NestJS' }
+      { label: 'Blueprint', value: 'Multi-account AWS' },
+      { label: 'Savings', value: '$40k/mo' },
+      { label: 'Focus', value: 'Cost & compliance' }
     ],
-    technologies: ['Angular', 'Signals', 'NestJS', 'TypeScript', 'MySQL', 'Prisma'],
+    technologies: ['AWS', 'Control Tower', 'Security Hub', 'FinOps', 'Lambda'],
     featured: true,
     type: 'company'
   },
   {
-    id: 'ultra-table',
-    title: 'Ultra-Table Angular Library',
-    summary: 'Reusable data table with virtual scrolling for large datasets.',
-    description: 'High-performance, reusable data table component with virtual scrolling, sorting, filtering, and pagination. Optimized for large datasets. Released internally via GitLab package registry.',
-    role: 'Frontend engineer',
-    timeline: '2025 - 2026',
-    impact: 'Standardized complex tables across internal apps.',
-    metrics: [
-      { label: 'Focus', value: 'Performance UI' },
-      { label: 'Use', value: 'Reusable library' },
-      { label: 'Key', value: 'Virtual scroll' }
-    ],
-    technologies: ['Angular', 'TypeScript', 'RxJS', 'CDK Virtual Scroll'],
-    featured: true,
-    type: 'company'
-  },
-  {
-    id: 'ulrs',
-    title: 'ULRS - Universal Loan Review System',
-    summary: 'Enterprise loan review platform with complex workflows.',
-    description: 'Enterprise loan review platform handling complex workflows, document processing, and review management. Built with Angular frontend, NestJS backend, and MySQL database, deployed on AWS.',
-    role: 'Full-stack engineer',
-    timeline: '2025 - 2026',
-    impact: 'Delivered scalable reviews and document processing.',
-    metrics: [
-      { label: 'Focus', value: 'Loan reviews' },
-      { label: 'Infra', value: 'AWS deployment' },
-      { label: 'Stack', value: 'Angular + NestJS' }
-    ],
-    technologies: ['Angular', 'NestJS', 'MySQL', 'AWS', 'TypeScript'],
-    featured: true,
-    type: 'company'
-  },
-  {
-    id: 'attendance-system',
-    title: 'Attendance & Server Management',
-    summary: 'Internal tools for employee attendance and infra ops.',
-    description: 'Internal systems for employee attendance tracking and server infrastructure management. Developed features, fixed bugs, and collaborated on testing and deployment.',
-    role: 'Backend + frontend',
+    id: 'infra-consolidation',
+    title: 'OVH + AWS Architecture Consolidation',
+    summary: 'Re-architected 100+ VM estate with clear prod/dev/UAT boundaries.',
+    description: 'Blueprinted environment segmentation, reduced bare-metal reliance, and introduced Zabbix-aligned monitoring to maintain architecture standards across OVH and AWS.',
+    role: 'Program Lead',
     timeline: '2025',
-    impact: 'Improved internal operations and reporting.',
+    impact: 'Lowered infrastructure expenses 30% while improving environment safety and governance.',
     metrics: [
-      { label: 'Focus', value: 'Internal tooling' },
-      { label: 'Stack', value: 'Node + Angular' },
-      { label: 'Type', value: 'Ops systems' }
+      { label: 'Architected', value: '100+ VMs' },
+      { label: 'Savings', value: '30% cost' },
+      { label: 'Scope', value: 'OVH + AWS' }
     ],
-    technologies: ['Angular', 'Node.js', 'MySQL', 'REST APIs'],
+    technologies: ['OVH', 'AWS', 'VMware', 'VPC/VNet', 'Zabbix'],
     featured: true,
     type: 'company'
   },
-  // Personal Projects
   {
-    id: 'mail-expense',
-    title: 'Mail Expense Dashboard',
-    summary: 'Automated expense analytics from email receipts.',
-    description: 'Automated expense tracking system that reads transaction emails via IMAP, parses amounts, categorizes expenses, and generates analytics dashboards. Runs on a self-hosted Raspberry Pi server.',
-    role: 'Solo developer',
+    id: 'security-automation',
+    title: 'Secure SDLC Architecture',
+    summary: 'Built organization-wide architecture for secure CI/CD and compliance tracking.',
+    description: 'Integrated Snyk, Cortex, Wazuh, and Nessus into architecture review pipelines, ensuring vulnerability data surfaced to stakeholders and teams could fix issues fast.',
+    role: 'Security Program Owner',
+    timeline: '2025 - Present',
+    impact: 'Elevated vulnerability visibility and shortened remediation cycles with architecture guardrails.',
+    metrics: [
+      { label: 'Architecture', value: 'Snyk + Cortex' },
+      { label: 'Process', value: 'Secure SDLC' },
+      { label: 'Scope', value: 'Org-wide' }
+    ],
+    technologies: ['Snyk', 'Cortex', 'Jira', 'GitHub', 'Wazuh', 'Nessus'],
+    featured: true,
+    type: 'company'
+  },
+  {
+    id: 'multi-region',
+    title: 'Multi-Region AWS Architecture',
+    summary: 'Delivered 99.99% availability with 50% lower latency through a regional blueprint.',
+    description: 'Defined multi-region AWS architecture patterns, tuning availability strategies, and orchestrating a 12-engineer delivery team for resilience and performance.',
+    role: 'Technical Operations Manager',
+    timeline: '2021 - 2024',
+    impact: 'Lowered latency by 50% and maintained 99.99% availability through resilient architecture.',
+    metrics: [
+      { label: 'Architecture', value: 'Multi-region AWS' },
+      { label: 'Availability', value: '99.99%' },
+      { label: 'Latency', value: '-50%' }
+    ],
+    technologies: ['AWS', 'CloudWatch', 'VPC', 'EC2', 'Load Balancing'],
+    featured: true,
+    type: 'company'
+  },
+  {
+    id: 'sql-optimization',
+    title: 'Enterprise SQL Architecture',
+    summary: 'Architected database performance and recovery strategies for ERP-critical systems.',
+    description: 'Directed data architecture projects including indexing, profiling, and backup/recovery automation to unlock 50% faster response times while reducing risk.',
+    role: 'Database Program Lead',
+    timeline: '2014 - 2024',
+    impact: 'Improved response times 50% and cut data loss risk 95% with hardened architecture.',
+    metrics: [
+      { label: 'Architecture', value: 'ERP systems' },
+      { label: 'Response', value: '-50%' },
+      { label: 'Risk', value: '-95% data loss' }
+    ],
+    technologies: ['MSSQL Server', 'SQL Profiler', 'Indexing', 'SSIS', 'MySQL'],
+    featured: true,
+    type: 'company'
+  },
+  {
+    id: 'productivity-automation',
+    title: 'Productivity & Timesheet Automation',
+    summary: 'Built attendance and project-based timesheet platforms with monitoring.',
+    description: 'Delivered internal web and desktop tools for attendance, time tracking, and productivity monitoring with automated screenshots and idle detection.',
+    role: 'Program Owner',
     timeline: '2025',
-    impact: 'Hands-free spend tracking and monthly summaries.',
+    impact: 'Improved reporting accuracy and achieved 100% productivity compliance.',
     metrics: [
-      { label: 'Input', value: 'IMAP receipts' },
-      { label: 'Deploy', value: 'Raspberry Pi' },
-      { label: 'Output', value: 'Analytics dashboard' }
+      { label: 'Coverage', value: 'Org-wide' },
+      { label: 'Automation', value: 'Idle detection' },
+      { label: 'Outcome', value: '100% compliance' }
     ],
-    technologies: ['Node.js', 'IMAP', 'Raspberry Pi', 'SQLite', 'Analytics'],
+    technologies: ['Jira', 'Reporting', 'Desktop Monitoring', 'Web App'],
     featured: true,
-    type: 'personal'
-  },
-  {
-    id: 'flow-mind',
-    title: 'Flow Mind',
-    summary: 'VS Code extension that turns selected code into flow diagrams.',
-    description: 'VS Code extension that generates a flow diagram from selected code/text to explain execution flow. Available in the Open VSX Registry (OVSX). Built with Node.js, TypeScript, the VS Code API, and Groq API.',
-    role: 'Extension author',
-    timeline: '2026',
-    impact: 'Makes code comprehension faster for readers.',
-    metrics: [
-      { label: 'Surface', value: 'VS Code' },
-      { label: 'Output', value: 'Flow diagram' },
-      { label: 'AI', value: 'Groq API' }
-    ],
-    links: [
-      { label: 'OVSX', url: 'https://open-vsx.org/', kind: 'ovsx' }
-    ],
-    technologies: ['Node.js', 'TypeScript', 'VS Code API', 'Groq API'],
-    featured: true,
-    type: 'personal'
-  },
-  {
-    id: 'vscode-gemini',
-    title: 'VS Code Command Generator',
-    summary: 'Generates CLI commands from natural language in VS Code.',
-    description: 'VS Code extension that uses the Gemini API to generate command-line instructions from natural language. Helps speed up terminal workflows.',
-    role: 'Extension author',
-    timeline: '2025',
-    impact: 'Faster terminal workflows with AI assistance.',
-    metrics: [
-      { label: 'Surface', value: 'VS Code' },
-      { label: 'Input', value: 'Natural language' },
-      { label: 'Output', value: 'CLI commands' }
-    ],
-    technologies: ['TypeScript', 'VS Code API', 'Gemini API'],
-    featured: true,
-    type: 'personal'
-  },
-  {
-    id: 'tsc-app',
-    title: 'npx tsc-app',
-    summary: 'CLI for scaffolding TypeScript projects with defaults.',
-    description: 'CLI tool for scaffolding TypeScript projects with sensible defaults. Generates project structure, tsconfig, and basic setup. Installable via npx.',
-    role: 'Tooling developer',
-    timeline: '2024',
-    impact: 'Speeds up project bootstrap.',
-    metrics: [
-      { label: 'Command', value: 'npx tsc-app' },
-      { label: 'Output', value: 'TS starter' },
-      { label: 'Focus', value: 'Fast setup' }
-    ],
-    technologies: ['Node.js', 'TypeScript', 'CLI', 'npm'],
-    featured: true,
-    type: 'personal'
+    type: 'company'
   }
 ];

@@ -3,23 +3,23 @@ import { Testimonial } from '@shared/types/portfolio.types';
 export const TESTIMONIALS_DATA: Testimonial[] = [
   {
     id: 't-1',
-    name: 'Team Lead',
-    role: 'Engineering Lead',
-    company: 'ULRS',
-    quote: 'Delivers clean Angular features quickly and communicates tradeoffs clearly.'
+    name: 'Program Director',
+    role: 'Leadership Sponsor',
+    company: 'Cloud Operations',
+    quote: 'Drives complex programs with clear governance, predictable delivery, and strong stakeholder alignment.'
   },
   {
     id: 't-2',
-    name: 'Project Manager',
-    role: 'Product Manager',
-    company: 'EXMINE',
-    quote: 'Reliable with deadlines and consistently improves user-facing workflows.'
+    name: 'Security Lead',
+    role: 'Compliance & Risk',
+    company: 'Enterprise Security',
+    quote: 'Built a secure SDLC pipeline that improved vulnerability visibility and sped up remediation.'
   },
   {
     id: 't-3',
-    name: 'Colleague',
-    role: 'Backend Engineer',
-    company: 'Internal Tools',
-    quote: 'Pairs well across frontend and backend, and improves overall system stability.'
+    name: 'Operations Manager',
+    role: 'Infrastructure',
+    company: 'Multi-Region Delivery',
+    quote: 'Consistently improves reliability, cost control, and operational readiness across teams.'
   }
 ];

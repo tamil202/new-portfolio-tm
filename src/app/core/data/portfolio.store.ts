@@ -34,7 +34,7 @@ export class PortfolioStore {
     this._projects().filter(p => p.type === 'personal')
   );
 
-  readonly projectCount = computed(() => 3); // 3+ projects completed
+  readonly projectCount = computed(() => 12); // 12+ architecture programs
 
   readonly allTechnologies = computed(() => {
     // Return array with 22 items to show 22+ technologies
@@ -48,7 +48,7 @@ export class PortfolioStore {
     this._experience().find(e => e.current)
   );
 
-  readonly totalYearsExperience = computed(() => 2); // 2+ years experience
+  readonly totalYearsExperience = computed(() => 18); // 18+ years experience
 
   readonly skillsByCategory = computed(() => {
     const map = new Map<string, string[]>();
