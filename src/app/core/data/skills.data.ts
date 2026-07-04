@@ -2,25 +2,24 @@ import { SkillGroup } from '@shared/types/portfolio.types';
 
 export const SKILLS_DATA: SkillGroup[] = [
   {
-    category: 'Architecture & Governance',
+    category: 'Program & Project Management',
     skills: [
-      { name: 'Enterprise Architecture' },
-      { name: 'Solution Architecture' },
-      { name: 'Architecture Review Boards' },
-      { name: 'Stakeholder Management' },
-      { name: 'Change Control' },
-      { name: 'Risk & Compliance' },
-      { name: 'TOGAF principles' },
-      { name: 'Audit & SOC guidance' }
+      { name: 'Technical Program Management' },
+      { name: 'People Management' },
+      { name: 'Agile / Scrum' },
+      { name: 'MS Project' },
+      { name: 'Jira' },
+      { name: 'Asana' },
+      { name: 'Lean Six Sigma (Yellow Belt)' },
+      { name: 'Procurement & Vendor Management' }
     ]
   },
   {
-    category: 'Data Architecture',
+    category: 'Database Administration',
     skills: [
-      { name: 'MSSQL Server' },
+      { name: 'MS SQL Server' },
       { name: 'PostgreSQL' },
       { name: 'MySQL' },
-      { name: 'Data Modeling' },
       { name: 'Indexing Strategy' },
       { name: 'Performance Tuning' },
       { name: 'Backup & Recovery' },
@@ -28,38 +27,51 @@ export const SKILLS_DATA: SkillGroup[] = [
     ]
   },
   {
-    category: 'Cloud Architecture',
+    category: 'Cloud & FinOps',
     skills: [
       { name: 'AWS' },
       { name: 'Azure' },
       { name: 'GCP' },
       { name: 'OCI' },
-      { name: 'Control Tower' },
+      { name: 'AWS Control Tower' },
       { name: 'Security Hub' },
-      { name: 'Hybrid VPC/VNet' },
-      { name: 'Cloud Reference Architectures' },
-      { name: 'FinOps' }
+      { name: 'Cost Optimization (FinOps)' },
+      { name: 'Enterprise Architecture' },
+      { name: 'System Design' }
     ]
   },
   {
-    category: 'Security & Observability',
+    category: 'Cloud Databases',
     skills: [
-      { name: 'Snyk' },
-      { name: 'Cortex' },
-      { name: 'Wazuh' },
-      { name: 'Nessus' },
-      { name: 'Zabbix' },
-      { name: 'Vulnerability Management' }
+      { name: 'AWS Aurora' },
+      { name: 'AWS RDS' },
+      { name: 'DynamoDB' },
+      { name: 'Google Cloud SQL' },
+      { name: 'Spanner' },
+      { name: 'Azure SQL' },
+      { name: 'Cosmos DB' }
     ]
   },
   {
-    category: 'Automation & Tooling',
+    category: 'DevOps & Data Tools',
     skills: [
-      { name: 'SSIS' },
-      { name: 'Power BI' },
+      { name: 'Docker' },
+      { name: 'Terraform' },
+      { name: 'GitHub / GitLab' },
+      { name: 'Prometheus' },
+      { name: 'AWS CloudFormation' },
       { name: 'Amazon Glue' },
-      { name: 'Jenkins' },
-      { name: 'GitHub/GitLab' },
+      { name: 'SSIS' },
+      { name: 'Power BI' }
+    ]
+  },
+  {
+    category: 'Security & Compliance',
+    skills: [
+      { name: 'Cloud Security' },
+      { name: 'Penetration Testing' },
+      { name: 'Risk & Governance' },
+      { name: 'Vulnerability Management' },
       { name: 'Windows Server' },
       { name: 'Ubuntu' },
       { name: 'Kali Linux' }

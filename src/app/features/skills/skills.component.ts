@@ -122,12 +122,33 @@ import { scrollStaggerReveal } from '@shared/animations/gsap.utils';
       color: var(--color-text);
       transition: border-color 0.2s ease, background 0.2s ease;
       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      will-change: transform;
     }
 
     .skill-badge:hover {
       border-color: var(--color-accent);
       background: rgba(59, 130, 246, 0.05);
       box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+      animation-play-state: paused;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .skill-badge {
+        animation: float-badge 6s ease-in-out infinite;
+      }
+
+      .skill-badge:nth-child(2n) { animation-duration: 7s; animation-delay: -1.4s; }
+      .skill-badge:nth-child(3n) { animation-duration: 5.4s; animation-delay: -2.8s; }
+      .skill-badge:nth-child(4n) { animation-duration: 6.6s; animation-delay: -0.6s; }
+      .skill-badge:nth-child(5n) { animation-duration: 5.8s; animation-delay: -3.6s; }
+      .skill-badge:nth-child(6n) { animation-duration: 7.4s; animation-delay: -2.1s; }
+    }
+
+    @keyframes float-badge {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-5px) rotate(-1.2deg); }
+      50% { transform: translateY(2px) rotate(1deg); }
+      75% { transform: translateY(-3px) rotate(-0.6deg); }
     }
   `]
 })
@@ -168,7 +189,7 @@ export class SkillsComponent {
       this.skillsGrid(),
       '.skill-badge',
       {
-        y: 20,
+        y: 0,
         duration: 0.4,
         stagger: 0.05,
         ease: 'power3.out'

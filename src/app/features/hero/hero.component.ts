@@ -52,7 +52,7 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
         </h2>
 
         <p #intro class="hero-intro">
-          Architecting resilient cloud systems, compliance-first programs, and high-availability data platforms across AWS, Azure, and GCP.
+          Leading IT infrastructure, cloud, database, and security programs across AWS, Azure, and GCP — with 20+ years driving FinOps savings, compliance, and production reliability.
         </p>
 
         <div #cta class="hero-cta">
@@ -65,15 +65,15 @@ gsap.registerPlugin(ScrollToPlugin, TextPlugin);
           <a href="#contact" class="btn btn-secondary cyber-btn" (click)="scrollTo($event, 'contact')">
             <span class="btn-glitch" data-text="Connect on Architecture">Connect on Architecture</span>
           </a>
-          <a href="/assets/Thiru_New.docx" class="btn btn-secondary cyber-btn" download>
-            <span class="btn-glitch" data-text="Download Architecture CV">Download Architecture CV</span>
+          <a href="/assets/Thirumurugan-Gnanam-Resume.pdf" class="btn btn-secondary cyber-btn" download>
+            <span class="btn-glitch" data-text="Download Resume">Download Resume</span>
           </a>
         </div>
 
         <div class="hero-badges" #badges>
-          <span class="badge-pill">Enterprise Architecture</span>
-          <span class="badge-pill">Cloud Systems Design</span>
-          <span class="badge-pill">Security-by-Design</span>
+          <span class="badge-pill">Cloud & FinOps</span>
+          <span class="badge-pill">Database Architecture</span>
+          <span class="badge-pill">Security & Compliance</span>
         </div>
 
         <!-- Stats HUD -->
@@ -572,7 +572,7 @@ export class HeroComponent {
       duration: 0.3
     }, 0.8)
     .to(this.roleText().nativeElement, {
-      text: { value: 'Senior Technical Architect', delimiter: '' },
+      text: { value: 'Dev Manager - IT & Cloud Infrastructure', delimiter: '' },
       duration: 1.5,
       ease: 'none'
     }, 0.9);
@@ -636,7 +636,7 @@ export class HeroComponent {
       el.style.opacity = '1';
     });
 
-    this.roleText().nativeElement.textContent = 'Senior Technical Architect';
+    this.roleText().nativeElement.textContent = 'Dev Manager - IT & Cloud Infrastructure';
   }
 
   scrollTo(event: Event, sectionId: string): void {

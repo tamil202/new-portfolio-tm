@@ -1,9 +1,10 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Project, SkillGroup, Experience, SocialLink, Testimonial } from '@shared/types/portfolio.types';
+import { Project, SkillGroup, Experience, SocialLink, Testimonial, Certification, EducationItem, Award } from '@shared/types/portfolio.types';
 import { PROJECTS_DATA } from './projects.data';
 import { SKILLS_DATA } from './skills.data';
 import { EXPERIENCE_DATA, SOCIAL_LINKS } from './experience.data';
 import { TESTIMONIALS_DATA } from './testimonials.data';
+import { CERTIFICATIONS_DATA, EDUCATION_DATA, AWARDS_DATA } from './credentials.data';
 
 @Injectable({ providedIn: 'root' })
 export class PortfolioStore {
@@ -13,6 +14,9 @@ export class PortfolioStore {
   private readonly _experience = signal<Experience[]>(EXPERIENCE_DATA);
   private readonly _socialLinks = signal<SocialLink[]>(SOCIAL_LINKS);
   private readonly _testimonials = signal<Testimonial[]>(TESTIMONIALS_DATA);
+  private readonly _certifications = signal<Certification[]>(CERTIFICATIONS_DATA);
+  private readonly _education = signal<EducationItem[]>(EDUCATION_DATA);
+  private readonly _awards = signal<Award[]>(AWARDS_DATA);
 
   // Public readonly signals
   readonly projects = this._projects.asReadonly();
@@ -20,6 +24,9 @@ export class PortfolioStore {
   readonly experience = this._experience.asReadonly();
   readonly socialLinks = this._socialLinks.asReadonly();
   readonly testimonials = this._testimonials.asReadonly();
+  readonly certifications = this._certifications.asReadonly();
+  readonly education = this._education.asReadonly();
+  readonly awards = this._awards.asReadonly();
 
   // Computed signals for derived data
   readonly featuredProjects = computed(() =>
@@ -48,7 +55,7 @@ export class PortfolioStore {
     this._experience().find(e => e.current)
   );
 
-  readonly totalYearsExperience = computed(() => 18); // 18+ years experience
+  readonly totalYearsExperience = computed(() => 20); // 20+ years experience
 
   readonly skillsByCategory = computed(() => {
     const map = new Map<string, string[]>();

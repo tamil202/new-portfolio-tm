@@ -5,13 +5,15 @@ import { SkillsComponent } from '@features/skills/skills.component';
 import { ProjectsComponent } from '@features/projects/projects.component';
 import { TestimonialsComponent } from '@features/testimonials/testimonials.component';
 import { ExperienceComponent } from '@features/experience/experience.component';
+import { CredentialsComponent } from '@features/credentials/credentials.component';
 import { ContactComponent } from '@features/contact/contact.component';
 import { StartButtonComponent } from '@features/start-button/start-button.component';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register GSAP plugin
-gsap.registerPlugin(ScrollToPlugin);
+// Register GSAP plugins
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ gsap.registerPlugin(ScrollToPlugin);
     ProjectsComponent,
     TestimonialsComponent,
     ExperienceComponent,
+    CredentialsComponent,
     ContactComponent,
     StartButtonComponent
   ],
@@ -65,10 +68,11 @@ gsap.registerPlugin(ScrollToPlugin);
           <li><a href="#projects" [class.active]="activeSection() === 'projects'" (click)="scrollTo($event, 'projects'); closeMobileNav()">Work</a></li>
           <li><a href="#testimonials" [class.active]="activeSection() === 'testimonials'" (click)="scrollTo($event, 'testimonials'); closeMobileNav()">Reviews</a></li>
           <li><a href="#experience" [class.active]="activeSection() === 'experience'" (click)="scrollTo($event, 'experience'); closeMobileNav()">Timeline</a></li>
+          <li><a href="#credentials" [class.active]="activeSection() === 'credentials'" (click)="scrollTo($event, 'credentials'); closeMobileNav()">Credentials</a></li>
           <li><a href="#contact" [class.active]="activeSection() === 'contact'" (click)="scrollTo($event, 'contact'); closeMobileNav()">Contact</a></li>
         </ul>
         <div class="nav-actions">
-          <a class="nav-link" href="/assets/Thiru_New.docx" download>Resume</a>
+          <a class="nav-link" href="/assets/Thirumurugan-Gnanam-Resume.pdf" download>Resume</a>
         </div>
       </nav>
     </header>
@@ -80,6 +84,7 @@ gsap.registerPlugin(ScrollToPlugin);
       <app-projects />
       <app-testimonials />
       <app-experience />
+      <app-credentials />
       <app-contact />
     </main>
 
@@ -410,7 +415,7 @@ export class AppComponent {
   readonly showBackToTop = signal(false);
 
   private sectionObserver: IntersectionObserver | null = null;
-  private readonly sectionIds = ['home', 'about', 'skills', 'projects', 'testimonials', 'experience', 'contact'];
+  private readonly sectionIds = ['home', 'about', 'skills', 'projects', 'testimonials', 'experience', 'credentials', 'contact'];
 
   // Architecture canvas animation properties
   private architectureCtx: CanvasRenderingContext2D | null = null;
@@ -426,6 +431,14 @@ export class AppComponent {
       this.setupScrollTracking();
       this.setupSectionObserver();
       this.setupKeyboardNavigation();
+
+      // Web font swaps (and images) can change section heights after each
+      // component's ScrollTrigger positions were first calculated, leaving
+      // later sections (Testimonials, Experience, Credentials) stuck below
+      // their trigger point and never revealed. Recalculate once layout settles.
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+      setTimeout(() => ScrollTrigger.refresh(), 2000);
     });
   }
 
@@ -433,6 +446,9 @@ export class AppComponent {
     this.hasStarted.set(true);
     // Kick off the architecture animation once the portal opens
     setTimeout(() => this.startArchitectureAnimation(), 500);
+    // Door/overlay reveal can shift layout; recalculate trigger positions
+    // once the reveal transition has settled.
+    setTimeout(() => ScrollTrigger.refresh(), 1200);
   }
 
   toggleMobileNav(): void {

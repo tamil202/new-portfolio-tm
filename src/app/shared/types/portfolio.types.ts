@@ -65,3 +65,21 @@ export interface Testimonial {
   company: string;
   quote: string;
 }
+
+export interface Certification {
+  id: string;
+  name: string;
+  issuer?: string;
+}
+
+export interface EducationItem {
+  id: string;
+  degree: string;
+  field: string;
+}
+
+export interface Award {
+  id: string;
+  title: string;
+  period?: string;
+}

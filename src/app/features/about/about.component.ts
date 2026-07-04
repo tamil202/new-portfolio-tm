@@ -11,6 +11,7 @@ import {
 import { PortfolioStore } from '@core/data/portfolio.store';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { prefersReducedMotion } from '@shared/utils/motion.utils';
 
 @Component({
   selector: 'app-about',
@@ -36,12 +37,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
         <div #content class="about-content">
           <div class="about-text">
             <p class="text-reveal">
-              Senior Technical Architect and MySQL Database Administrator with 18+ years of experience
-              shaping resilient cloud and data platforms.
+              Senior IT and Cloud Manager with 20+ years of experience across IT infrastructure, database
+              platforms, cloud operations, and security governance.
             </p>
             <p class="text-reveal">
-              Focused on enterprise architecture, FinOps governance, and secure multi-region systems
-              that stay compliant and performant under heavy load.
+              Proven ability to lead cross-functional teams, drive cloud cost optimization, strengthen
+              compliance, and improve production reliability across enterprise environments.
             </p>
             <p class="text-reveal">
               Certified across cloud, security, and architecture disciplines, guiding teams through
@@ -373,6 +374,11 @@ export class AboutComponent {
     const textReveals = section.querySelectorAll('.text-reveal');
     const stats = this.statElements();
 
+    if (prefersReducedMotion()()) {
+      this.showContentInstantly(indicator, title, cornerFrames, textReveals, stats);
+      return;
+    }
+
     // Create main scroll trigger
     const trigger = ScrollTrigger.create({
       trigger: section,
@@ -387,6 +393,17 @@ export class AboutComponent {
         );
       }
     });
+
+    // Safety net: if the trigger's position was miscalculated (e.g. layout
+    // shifted after fonts loaded) and "onEnter" never fires, reveal anyway.
+    setTimeout(() => {
+      if (this.hasAnimated) return;
+      this.hasAnimated = true;
+      this.playEntranceAnimation(
+        screenTransition, scanLine, indicator, title,
+        cornerFrames, textReveals, stats
+      );
+    }, 4000);
 
     this.cleanupFns.push(() => trigger.kill());
 
@@ -494,6 +511,33 @@ export class AboutComponent {
       this.animateNumber(this.displayProjects, this.projectCount(), 1200);
       this.animateNumber(this.displayTech, this.techCount(), 1400);
     }, [], 1.1);
+  }
+
+  private showContentInstantly(
+    indicator: HTMLElement,
+    title: HTMLElement,
+    cornerFrames: NodeListOf<Element>,
+    textReveals: NodeListOf<Element>,
+    stats: readonly ElementRef[]
+  ): void {
+    [indicator, title, ...Array.from(cornerFrames), ...Array.from(textReveals)].forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+
+    stats.forEach(stat => {
+      const el = stat.nativeElement;
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      const bar = el.querySelector('.stat-bar');
+      if (bar) {
+        (bar as HTMLElement).style.width = '100%';
+      }
+    });
+
+    this.displayYears.set(this.yearsExperience());
+    this.displayProjects.set(this.projectCount());
+    this.displayTech.set(this.techCount());
   }
 
   private animateNumber(

@@ -78,6 +78,21 @@ export function staggerReveal(
 }
 
 /**
+ * Some browser/layout combinations can miscalculate a ScrollTrigger's
+ * position before fonts/images settle, leaving content that starts at
+ * opacity 0 permanently hidden if "onEnter" never fires. As a safety net,
+ * force the animation to its end state after a delay regardless of
+ * whether the trigger ever activated.
+ */
+function attachRevealFallback(animation: gsap.core.Tween | gsap.core.Timeline, delayMs = 4000): void {
+  setTimeout(() => {
+    if (animation.progress() === 0) {
+      animation.progress(1);
+    }
+  }, delayMs);
+}
+
+/**
  * Creates a scroll-triggered animation
  */
 export function scrollReveal(
@@ -99,6 +114,7 @@ export function scrollReveal(
   };
 
   const animation = animationFn(target);
+  attachRevealFallback(animation);
 
   return ScrollTrigger.create({
     ...defaultTrigger,
@@ -131,6 +147,8 @@ export function scrollStaggerReveal(
     stagger: (opts.stagger ?? 0) * scale,
     paused: true
   });
+
+  attachRevealFallback(tween);
 
   return ScrollTrigger.create({
     trigger: target,

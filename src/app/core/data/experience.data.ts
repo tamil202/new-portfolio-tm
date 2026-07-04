@@ -4,51 +4,53 @@ export const EXPERIENCE_DATA: Experience[] = [
   {
     id: 'exp-1',
     company: 'Stellar Innovations',
-    role: 'Senior Technical Project Manager (IT Dev, Infra & Security)',
+    role: 'IT Development Manager (IT Infra & Cloud, Security & Compliance)',
     period: '02/2025 - Present',
     current: true,
     highlights: [
-      'Managed 80+ developers across Python, full-stack, infrastructure, and cloud database teams with operational support.',
-      'Standardized Jira tracking with Kanban/Scrum workflows to improve cross-team delivery visibility.',
-      'Implemented Snyk integrated with Jira/GitHub and rolled out Cortex developer scorecards.',
-      'Consolidated OVH + AWS infrastructure (100+ VMs) with environment segregation; achieved 30% cost savings.',
-      'Deployed AWS Control Tower and Security Hub; applied FinOps to cut monthly spend 40% ($100k to $60k).',
-      'Led security analysts using Wazuh/Nessus and drove remediation for critical findings.'
+      'Led cross-functional programs across cloud, DevOps, database, and security, aligning delivery with engineering, operations, and compliance.',
+      'Managed 100+ engineers across development, infrastructure, and operations teams, driving execution, accountability, and delivery outcomes.',
+      'Improved application performance from 20% to 80% through architecture redesign, performance tuning, and scalable system enhancements.',
+      'Reduced cloud costs 30-40% (₹1 Cr to ₹60 lakhs annually) through FinOps, while implementing AWS Control Tower and Security Hub for governance and compliance.',
+      'Reduced DevOps licensing costs 40% and saved approximately $80K annually by consolidating multiple toolchains into GitLab.',
+      'Led vulnerability remediation management and acted as technical SPOC for SOC and internal audits, ensuring compliance readiness.',
+      'Collaborated with procurement teams to manage end-to-end procurement activities and define software development specifications.',
+      'Led development of an AI-powered employee attendance and activity tracking system with real-time monitoring, improving productivity and reducing time wastage.'
     ]
   },
   {
     id: 'exp-2',
     company: 'Grand Mark, South Africa',
-    role: 'Technical Operations Manager – SQL Server Database & Cloud',
-    period: '07/2021 - 07/2024',
+    role: 'Business Solution Manager – SQL Server & Cloud',
+    period: '02/2022 - 07/2024',
     current: false,
     highlights: [
-      'Led a 12-engineer team delivering multi-region AWS deployment, reducing latency 50% and achieving 99.99% availability.',
-      'Adopted Agile delivery, increasing speed by 30% and reducing costs 25%.',
-      'Unified project management workflows, reducing cross-department delays by 60%.',
-      'Directed SQL performance tuning, improving response times 50% and reducing data loss risk 95%.',
-      'Implemented indexing and query optimization initiatives, reducing critical query time by 35%.'
+      'Led a team of 12 engineers delivering cloud-based solutions across cloud and database platforms.',
+      'Achieved 99.99% availability through optimized architecture and platform improvements.',
+      'Improved MSSQL performance 35-50% using tuning and indexing strategies.',
+      'Implemented DR and backup strategies, reducing data loss risk by 95%.',
+      'Led SYSPRO ERP implementation across 100+ branches in Africa, standardizing business processes and improving enterprise adoption.'
     ]
   },
   {
     id: 'exp-3',
-    company: 'Zensar Technologies, South Africa',
-    role: 'Project Lead / Database & Cloud Support Engineer',
+    company: 'Zensar Technologies, India & South Africa',
+    role: 'Project Lead – Database & Cloud Support',
     period: '04/2007 - 02/2022',
     current: false,
     highlights: [
-      'Served as technical consultant, securing major accounts including Grand Mark, Netforist, Silica, Nedbank, and Harmony Gold.',
-      'Managed SQL databases for high-transaction retail apps, delivering 99% uptime with robust backups.',
-      'Planned and executed SQL upgrades, patches, and replication with minimal downtime.',
-      'Led AWS/Azure migrations for 5TB+ data, improving scalability during peak periods.',
-      'Conducted TCO analysis and CloudWatch monitoring, reducing operational costs by 30%.'
+      'Delivered enterprise database and cloud solutions for global clients across multiple engagements.',
+      'Managed MSSQL environments with 99%+ uptime through proactive support and control.',
+      'Led cloud migrations involving 5TB+ of data and implemented monitoring solutions to improve visibility and reliability.',
+      'Reduced operational costs by 30% through optimization and automation initiatives.',
+      'Advised clients on solution delivery and technical strategy, supporting business growth and successful project execution.'
     ]
   },
   {
     id: 'exp-4',
     company: 'Videocon International',
     role: 'Technical Production Engineer',
-    period: '5+ Years',
+    period: '6 Years',
     current: false,
     highlights: [
       'Optimized production systems for reliability and throughput in electronics manufacturing.',
@@ -60,7 +62,7 @@ export const EXPERIENCE_DATA: Experience[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: 'Email',
-    url: 'mailto:thirumurugan.g@zohomail.in',
+    url: 'mailto:thirucare@zohomail.com',
     icon: 'email'
   },
 ];

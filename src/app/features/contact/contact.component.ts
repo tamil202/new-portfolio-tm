@@ -32,6 +32,10 @@ import { gsap } from 'gsap';
                 <span class="meta-value">Bangalore, India</span>
               </div>
               <div class="meta-row">
+                <span class="meta-label">Phone</span>
+                <span class="meta-value">+91 90110 40150</span>
+              </div>
+              <div class="meta-row">
                 <span class="meta-label">Timezone</span>
                 <span class="meta-value">IST (UTC+05:30)</span>
               </div>
@@ -310,7 +314,7 @@ export class ContactComponent {
   readonly contactContent = viewChild.required<ElementRef>('contactContent');
   readonly socialLinks = this.store.socialLinks;
   readonly quickLinks = [
-    { label: 'Resume (DOCX)', url: '/assets/Thiru_New.docx' },
+    { label: 'Resume (PDF)', url: '/assets/Thirumurugan-Gnanam-Resume.pdf' },
   ];
 
   // Form data as signals for reactivity
@@ -372,7 +376,7 @@ export class ContactComponent {
     this.isSubmitting.set(true);
 
     // Build mailto URL with form data
-    const toEmail = 'thirumurugan.g@zohomail.in';
+    const toEmail = 'thirucare@zohomail.com';
     const userName = this.name();
     const userEmail = this.email();
     const userMessage = this.message();
